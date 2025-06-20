@@ -1,27 +1,20 @@
-import type React from "react"
-import "@/app/globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import type { Metadata } from 'next'
+import './globals.css'
+
+export const metadata: Metadata = {
+  title: 'v0 App',
+  description: 'Created with v0',
+  generator: 'v0.dev',
+}
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
-      <head>
-        <title>이정하 포트폴리오</title>
-        <meta name="description" content="연성대학교 영상콘텐츠학과 이정하의 포트폴리오 사이트입니다." />
-      </head>
-      <body>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   )
 }
-
-export const metadata = {
-      generator: 'v0.dev'
-    };

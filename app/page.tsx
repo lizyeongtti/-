@@ -1,5 +1,7 @@
-import PortfolioSite from "@/components/portfolio-site"
+"use client"
 
-export default function Home() {
-  return <PortfolioSite />
+import { Banner } from "../banner"
+
+export default function SyntheticV0PageForDeployment() {
+  return <Banner />
 }

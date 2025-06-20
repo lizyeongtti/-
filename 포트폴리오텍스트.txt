@@ -1,0 +1,99 @@
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+
+export default function PortfolioSite() {
+  const [guestbookEntries, setGuestbookEntries] = useState([]);
+  const [entry, setEntry] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (entry.trim()) {
+      setGuestbookEntries([...guestbookEntries, entry]);
+      setEntry("");
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-800">
+      <div className="max-w-5xl mx-auto px-4 py-10 space-y-16">
+        {/* 소개 섹션 */}
+        <section className="bg-white rounded-2xl shadow-md p-6 md:p-10 flex flex-col md:flex-row items-center gap-6">
+          <img
+            src="/my-photo.jpg"
+            alt="프로필 사진"
+            className="w-32 h-32 rounded-full object-cover"
+          />
+          <div className="text-center md:text-left space-y-2">
+            <h1 className="text-3xl font-bold text-[#127369]">이정하</h1>
+            <p>
+              안녕하세요! 저는 <strong>연성대학교 영상콘텐츠학과 22학번</strong> 이정하입니다.  
+              사용자 경험을 중요하게 생각하며, 직관적이고 감각적인 콘텐츠를 만드는 것을 좋아합니다.
+            </p>
+            <p><strong>기술 스택:</strong> 프리미어프로, 애프터이펙트, 일러스트, 포토샵, 시네마4D</p>
+            <p><strong>연락처:</strong> jee5879@naver.com / 2022102074@yeonsung.ac.kr</p>
+            <p>
+              <strong>GitHub:</strong>{" "}
+              <a
+                href="https://github.com/lizyeongtti?tab=projects"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#127369] hover:underline"
+              >
+                github.com/lizyeongtti?tab=projects
+              </a>
+            </p>
+          </div>
+        </section>
+
+        {/* 작품 섹션 */}
+        <section>
+          <h2 className="text-2xl font-bold mb-6 text-center text-[#127369]">작품 소개</h2>
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {[1, 2, 3].map((num) => (
+              <Card key={num} className="overflow-hidden hover:shadow-lg transition-shadow rounded-2xl">
+                <img
+                  src={`/project${num}.jpg`}
+                  alt={`작품 ${num}`}
+                  className="w-full h-48 object-cover"
+                />
+                <CardContent className="p-4">
+                  <h3 className="text-lg font-semibold mb-1 text-[#127369]">작품 {num}</h3>
+                  <p className="text-sm text-gray-600">
+                    디자인과 사용자 경험을 고려하여 제작한 프로젝트입니다.
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* 방명록 섹션 */}
+        <section className="bg-white rounded-2xl shadow-md p-6 md:p-10">
+          <h2 className="text-2xl font-bold mb-4 text-[#127369]">방명록</h2>
+          <form onSubmit={handleSubmit} className="mb-6">
+            <textarea
+              className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#127369]"
+              placeholder="방명록에 한마디 남겨주세요!"
+              value={entry}
+              onChange={(e) => setEntry(e.target.value)}
+              rows={3}
+            />
+            <button
+              type="submit"
+              className="mt-2 bg-[#127369] text-white px-4 py-2 rounded-lg hover:bg-[#0f5d55] transition"
+            >
+              등록하기
+            </button>
+          </form>
+          <div className="space-y-3">
+            {guestbookEntries.map((msg, idx) => (
+              <div key={idx} className="bg-gray-100 p-3 rounded-lg">
+                {msg}
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
